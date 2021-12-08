@@ -20,7 +20,7 @@
     {
         if (!_mappingValues.ContainsKey(key))
         {
-            _mappingValues.Add(key, new Mapping(key, _digits[key], value.ToCharArray()));
+            _mappingValues.Add(key, new Mapping(_digits[key], value.ToCharArray()));
         }
     }
 
@@ -44,10 +44,7 @@
 
     public void CalcualteLength5Mappings(string value)
     {
-        if (value.Length != 5 || MappingExists(value))
-        {
-            return;
-        }
+        if (value.Length != 5 || MappingExists(value)) return;
 
         var potentialDigits = GetPotentialDigits(value);
         var missing = _mappingValues[9].Encoded.Count(x => value.Contains(x));
@@ -63,7 +60,7 @@
 
     private bool MappingExists(string value)
     {
-        return _mappingValues.Any(a => a.Value.Encoded.All(v => value.Contains(v)) && a.Value.Encoded.Length == value.Length);
+        return _mappingValues.Any(a => a.Value.Encoded.All(v => value.Contains(v)) && a.Value.Length() == value.Length);
     }
 
     private Dictionary<int, char[]> GetPotentialDigits(string value)
@@ -74,13 +71,10 @@
 
     public bool DiscoverMatchingMapping(string value, int length, int match, int mapping)
     {
-        if (value.Length == length)
+        if (value.Length == length && _mappingValues[match].Encoded.All(e => value.Contains(e)))
         {
-            if (_mappingValues[match].Encoded.All(e => value.Contains(e)))
-            {
-                SetMapping(mapping, value);
-                return true;
-            }
+            SetMapping(mapping, value);
+            return true;
         }
         return false;
     }
@@ -93,7 +87,7 @@
             return validDigits.First().Key.ToString();
         }
 
-        var matchingDigit = _mappingValues.Where(x => x.Value.Encoded.All(v => value.Contains(v) && x.Value.Encoded.Length == value.Length));
+        var matchingDigit = _mappingValues.Where(x => x.Value.Encoded.All(v => value.Contains(v) && x.Value.Length() == value.Length));
         if (matchingDigit.Any())
         {
             return matchingDigit.First().Key.ToString();
@@ -105,14 +99,17 @@
 
 public class Mapping
 {
-    public int Key { get; }
     public char[] Decoded { get; }
     public char[]  Encoded { get; }
 
-    public Mapping(int key, char[] decoded, char[] encoded)
+    public Mapping(char[] decoded, char[] encoded)
     {
-        Key = key;
         Decoded = decoded.OrderBy(x => x).ToArray();
         Encoded = encoded.OrderBy(x => x).ToArray();
+    }
+
+    public int Length()
+    {
+        return Decoded.Length;        
     }
 }
