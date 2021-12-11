@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 public class Day6
 {
     public long Execute(int[] input, int totalDays, bool writeLog = false)
@@ -16,12 +14,9 @@ public class Day6
 
     private Dictionary<int, long> CreateInitialDictionary(int[] input)
     {
-        var result = new Dictionary<int, long>();
-        for (var i = 0; i <= 8; i++)
-        {
-            result.Add(i, input.Count(x => x == i));
-        }
-        return result;
+        return Enumerable.Range(0, 8)
+            .Select(i => (i, input.LongCount(x => x == i)))
+            .ToDictionary(key => key.i, value => value.Item2);
     }
 
     private Dictionary<int, long> ProcessDay(Dictionary<int, long> input)

@@ -1,6 +1,6 @@
 ﻿public class Fish
 {
-    public int Value { get; set; }
+    public int Value { get; private set; }
 
     public Fish(int initialValue = 8)
     {
@@ -8,13 +8,8 @@
     }
 
     public bool Update()
-    {
-        if (Value == 0)
-        {
-            Value = 6;
-            return true;
-        }
-        Value -= 1;
-        return false;
+    {       
+        Value = Value == 0 ? 6 : Value - 1;
+        return Value == 6;
     }
 }
