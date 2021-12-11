@@ -1,12 +1,19 @@
 ﻿var executor = new DayX();
-var input = File.ReadAllLines("input/input_test.txt");
+var measurements = File.ReadAllLines("input/input_test.txt");
+var sw = System.Diagnostics.Stopwatch.StartNew();
 
 // 
 // Part One
 // 
-Console.WriteLine("Part 1 Result: " + executor.Part1(input));
+Console.WriteLine("------------------------------");
+Console.WriteLine("Part 1 Result: " + executor.Part1(measurements.ToArray()));
+Console.WriteLine($"Execution Time: {sw.ElapsedMilliseconds}");
+
+sw.Reset();
 
 // 
 // Part Two
 // 
-Console.WriteLine("Part 2 Result: " + executor.Part2(input));
+Console.WriteLine("------------------------------");
+Console.WriteLine("Part 2 Result: " + executor.Part2(measurements.ToArray()));
+Console.WriteLine($"Execution Time: {sw.ElapsedMilliseconds}");
