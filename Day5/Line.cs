@@ -9,10 +9,10 @@ public class Line
         EndCoordinate = new Coordinate(endCords);
     }
 
-    public Coordinate[] LocationHits(bool simple)
+    public Coordinate[] LocationHits(bool letOpponentWin)
     {
         var coordinates = new List<Coordinate>();
-        if (simple && (StartCoordinate.PosX != EndCoordinate.PosX && StartCoordinate.PosY != EndCoordinate.PosY))
+        if (letOpponentWin && (StartCoordinate.PosX != EndCoordinate.PosX && StartCoordinate.PosY != EndCoordinate.PosY))
         {
             return coordinates.ToArray();
         }
