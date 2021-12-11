@@ -1,12 +1,19 @@
-﻿var day1 = new Day1();
-var measurements = File.ReadAllLines("input/simple_input.txt").Select(i => int.Parse(i));
+﻿var executor = new Day1();
+var measurements = File.ReadAllLines("input/input.txt").Select(i => int.Parse(i));
+var sw = System.Diagnostics.Stopwatch.StartNew();
 
 // 
 // Part One
 // 
-Console.WriteLine("Part 1 Result: " + day1.Part1(measurements.ToArray()));
+Console.WriteLine("------------------------------");
+Console.WriteLine("Part 1 Result: " + executor.Part1(measurements.ToArray()));
+Console.WriteLine($"Execution Time: {sw.ElapsedMilliseconds}");
+
+sw.Reset();
 
 // 
 // Part Two
 // 
-Console.WriteLine("Part 1 Result: " + day1.Part2(measurements.ToArray()));
+Console.WriteLine("------------------------------");
+Console.WriteLine("Part 2 Result: " + executor.Part2(measurements.ToArray()));
+Console.WriteLine($"Execution Time: {sw.ElapsedMilliseconds}");
