@@ -1,6 +1,6 @@
 public class Board
 {
-    private Number[,] _data = new Number[5,5];
+    private Number[,] _data = new Number[5, 5];
     private bool _bingo;
 
     public Board(List<int[]> lines)
@@ -20,8 +20,8 @@ public class Board
         if (match != null)
         {
             match.Drawn = true;
-            SetBingo(GetRow(match.Row));
-            SetBingo(GetColumn(match.Column));
+            CheckForBingo(GetRow(match.Row));
+            CheckForBingo(GetColumn(match.Column));
         }
     }
 
@@ -40,12 +40,13 @@ public class Board
         return Enumerable.Range(0, 5).Select(x => _data[x, index]);
     }
 
-    private void SetBingo(IEnumerable<Number> values)
+    private void CheckForBingo(IEnumerable<Number> values)
     {
-        if (!_bingo)
+        if (_bingo)
         {
-            _bingo = values.All(x => x.Drawn);
+            return;
         }
+        _bingo = values.All(x => x.Drawn);
     }
 
     public int GetUnmarkedSum()

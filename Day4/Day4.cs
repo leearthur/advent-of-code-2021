@@ -37,20 +37,14 @@ public class Day4
 
     private void RemoveBoards(List<Board> boards, Board[] bingos)
     {
-        if (boards.Count() == 1)
+        if (boards.Count() <= 1)
         {
             return;
         }
 
-        if (bingos.Any())
+        foreach(var bingoBoard in bingos)
         {
-            foreach(var board in bingos)
-            {
-                if (boards.Count() > 1)
-                {
-                    boards.Remove(board);
-                }
-            }
+            boards.Remove(bingoBoard);
         }
     }
 }
