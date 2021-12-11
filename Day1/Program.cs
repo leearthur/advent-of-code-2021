@@ -9,7 +9,7 @@ Console.WriteLine("------------------------------");
 Console.WriteLine("Part 1 Result: " + executor.Part1(measurements.ToArray()));
 Console.WriteLine($"Execution Time: {sw.ElapsedMilliseconds}");
 
-sw.Reset();
+sw.Restart();
 
 // 
 // Part Two

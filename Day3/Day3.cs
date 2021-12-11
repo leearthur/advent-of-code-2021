@@ -2,7 +2,7 @@ public class Day3
 {
     public long Part1(string[] input)
     {
-        var gamma = "";
+        var gamma = string.Empty;
         for (var pos = 0; pos < input[0].Length; pos++)
         {
             gamma += GetMostCommonValue(input, pos).ToString();
@@ -78,14 +78,10 @@ public class Day3
             .ToArray();
     }
 
-    private string Invert(string input)
+    public string Invert(string input)
     {
-        var result = "";
-        foreach(var chr in input)
-        {
-            result += Math.Abs(byte.Parse(chr.ToString()) - 1).ToString();
-        }
-
-        return result;
+        var intValue = Convert.ToInt64(input, 2);
+        var invertedValue = Convert.ToString(~intValue, 2);
+        return invertedValue.Remove(0, invertedValue.Length - input.Length);
     }
 }
